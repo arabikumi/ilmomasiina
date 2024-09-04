@@ -2,15 +2,15 @@ name: Build & deploy
 
 env:
   # Change this to upload the built image to your own organization.
-  docker_tag: "ghcr.io/tietokilta/ilmomasiina"
+  docker_tag: "ghcr.io/arabikumi/ilmomasiina"
 
   # Change these to customize your build.
-  branding_header_title_text: "Tietokillan ilmomasiina"
+  branding_header_title_text: "Koneinsinöörikillan ilmokone"
   branding_footer_gdpr_text: "Tietosuoja"
-  branding_footer_gdpr_link: "https://tietokilta.fi/kilta/hallinto/viralliset-asiat/rekisteriselosteet/"
-  branding_footer_home_text: "Tietokilta.fi"
-  branding_footer_home_link: "https://tietokilta.fi"
-  branding_login_placeholder_email: "admin@tietokilta.fi"
+  branding_footer_gdpr_link: "https://koneinsinoorikilta.fi/kilta/rekisteriselosteet/"
+  branding_footer_home_text: "Koneinsinoorikilta.fi"
+  branding_footer_home_link: "https://koneinsinoorikilta.fi"
+  branding_login_placeholder_email: "admin@koneinsinoorikilta.fi"
 
 on:
   push:
@@ -32,7 +32,7 @@ jobs:
       packages: write
       contents: read
     # Change this to your repo name to build automatically on your fork.
-    if: github.repository == 'Tietokilta/ilmomasiina'
+    if: github.repository == 'arabikumi/ilmomasiina'
     steps:
       - name: Check out the repo
         uses: actions/checkout@v4
@@ -98,7 +98,7 @@ jobs:
 
       - uses: azure/webapps-deploy@v3
         with:
-          app-name: tik-ilmo-prod-app
+          app-name: kik-ilmo-prod-app
           images: "${{ env.docker_tag }}:${{ needs.docker.outputs.tag }}"
 
   # This is disabled on forks since you probably don't need to upload your own packages
